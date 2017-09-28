@@ -1,0 +1,4 @@
+$ while true;
+> do
+>   wget http://nlb-1-6386cc6bf24701af.elb.us-west-2.amazonaws.com/phpinfo2.php &
+> done
