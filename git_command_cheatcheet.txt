@@ -23,5 +23,9 @@ To push an existing repository from the command line (assumes it's already initi
 git remote add origin https://github.com/spatters-git/gcp-python-practice.git
 git push -u origin master
 
+--
+To save Github credentials on local machine:
 
+git config --global credential.helper cache
+The next time you do something that requires auth, it will save the creds you provide
 
