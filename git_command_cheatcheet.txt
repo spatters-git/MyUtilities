@@ -1,0 +1,19 @@
+To create a new local repository on the command line:
+echo "# <repo name>" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/spatters-git/gcp-python-practice.git
+git push -u origin master
+--
+
+To clone a repo from github:
+git clone <url to repo>
+
+--
+To push an existing repository from the command line:
+git remote add origin https://github.com/spatters-git/gcp-python-practice.git
+git push -u origin master
+
+
+
