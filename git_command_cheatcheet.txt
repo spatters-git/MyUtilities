@@ -1,9 +1,10 @@
-To create a new local repository on the command line:
+To create a new local repository on the command line, add it to github, and push the contents:
+
 echo "# <repo name>" >> README.md
 git init
-git add README.md
+git add .
 git commit -m "first commit"
-git remote add origin https://github.com/spatters-git/gcp-python-practice.git
+git remote add origin <url of repo already created in github>
 git push -u origin master
 --
 
@@ -11,7 +12,14 @@ To clone a repo from github:
 git clone <url to repo>
 
 --
-To push an existing repository from the command line:
+To update files:
+edit and save file
+git add <filename>
+git commit -m "<change comments>
+git push -u origin master
+
+--
+To push an existing repository from the command line (assumes it's already initialized locally):
 git remote add origin https://github.com/spatters-git/gcp-python-practice.git
 git push -u origin master
 
