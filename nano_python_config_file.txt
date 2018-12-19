@@ -1,0 +1,6 @@
+## On linux, paste this to ~/.nanorc to set up nano for Python development
+## Below assumes the location of the python syntax file
+include /usr/share/nano/python.nanorc
+set tabsize 4
+## Below converts typed tabs to spaces
+set tabstospaces
