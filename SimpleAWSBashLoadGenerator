@@ -1,4 +1,5 @@
-$ while true;
-> do
->   wget http://nlb-1-6386cc6bf24701af.elb.us-west-2.amazonaws.com/phpinfo2.php &
-> done
+$ while true; do wget $STATIC_EXTERNAL_IP; done
+
+or
+
+$ while true; do curl -m1 $STATIC_EXTERNAL_IP; done
