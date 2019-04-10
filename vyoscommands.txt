@@ -1,0 +1,28 @@
+configure
+set vpn ipsec esp-group gcp-esp compression 'disable' 
+set vpn ipsec esp-group gcp-esp lifetime '10800' 
+set vpn ipsec esp-group gcp-esp mode 'tunnel' 
+set vpn ipsec esp-group gcp-esp pfs 'enable' 
+set vpn ipsec esp-group gcp-esp proposal 1 encryption 'aes256' 
+set vpn ipsec esp-group gcp-esp proposal 1 hash 'sha1'
+set vpn ipsec ike-group gcp-ike ikev2-reauth 'no' 
+set vpn ipsec ike-group gcp-ike key-exchange 'ikev2' 
+set vpn ipsec ike-group gcp-ike lifetime '36000' 
+set vpn ipsec ike-group gcp-ike proposal 1 encryption 'aes256' 
+set vpn ipsec ike-group gcp-ike proposal 1 hash 'sha1' 
+set vpn ipsec ike-group gcp-ike proposal 1 dh-group 14
+set vpn ipsec ipsec-interfaces interface ‘eth0’
+set vpn ipsec site-to-site peer 35.245.232.133 authentication id 139.178.66.230
+set vpn ipsec site-to-site peer 35.245.232.133 authentication mode 'pre-shared-secret'
+set vpn ipsec site-to-site peer 35.245.232.133 authentication pre-shared-secret f9+0xeb74oU/xJkhTCjR8XmsvZM9iRoZ
+set vpn ipsec site-to-site peer 35.245.232.133 ike-group 'gcp-ike'
+set vpn ipsec site-to-site peer 35.245.232.133 local-address 139.178.66.230
+set vpn ipsec site-to-site peer 35.245.232.133 tunnel 0 allow-nat-networks 'disable'
+set vpn ipsec site-to-site peer 35.245.232.133 tunnel 0 allow-public-networks 'disable'
+set vpn ipsec site-to-site peer 35.245.232.133 tunnel 0 esp-group 'gcp-esp'
+set vpn ipsec site-to-site peer 35.245.232.133 tunnel 0 local prefix 10.100.3.128/28
+set vpn ipsec site-to-site peer 35.245.232.133 tunnel 0 remote prefix 10.0.0.0/25
+set protocols static route 10.0.0.0/25 next-hop 139.178.66.230 distance ‘1’
+commit
+save
+exit 
