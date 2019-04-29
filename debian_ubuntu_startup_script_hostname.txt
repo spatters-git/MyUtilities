@@ -1,8 +1,8 @@
 #! /bin/bash
-apt-get update
-apt-get install -y apache2
+sudo apt-get update
+sudo apt-get install -y apache2
 sudo update-rc.d apache2 enable
-cat <<EOF > /var/www/html/index.html
+sudo cat <<EOF > /var/www/html/index.html
 <html><body><h1>Hello World</h1>
 <p>hostname is: $(hostname)</p>
 </body></html>
