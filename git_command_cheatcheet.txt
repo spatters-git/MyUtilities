@@ -1,5 +1,9 @@
-To create a new local repository on the command line, add it to github, and push the contents:
+To configure Git on a new local machine (git has already been installed):
+git config --global user.email "seanpatterson@<whatever.com>"
+git config --global user.name "Sean Patterson"
 
+To create a new local repository on the command line, add it to github, and push the contents:
+<<better idea is to create the repo in github and clone it to local>>
 echo "# <repo name>" >> README.md
 git init
 git add .
@@ -8,15 +12,18 @@ git remote add origin <url of repo already created in github>
 git push -u origin master
 --
 
-To clone a repo from github:
+To clone a repo from github, via standard github authentication:
 git clone <url to repo>
+
+To clone a repo from Google Cloud Repo, via gcloud:
+gcloud source repos clone <cloud repo name> --project=<gcp project where repo lives>
 
 --
 To update files:
 edit and save file
-git add <filename>
+git add <filename> --OR-- git add .
 git commit -m "<change comments>
-git push -u origin master
+git push -u origin master --OR-- if origin is set and using Master, just run "git push" with no options
 
 --
 To push an existing repository from the command line (assumes it's already initialized locally):
@@ -24,7 +31,7 @@ git remote add origin https://github.com/spatters-git/gcp-python-practice.git
 git push -u origin master
 
 --
-To save Github credentials on local machine:
+To save Github credentials on local machine (if not using gcloud):
 
 git config --global credential.helper cache
 The next time you do something that requires auth, it will save the creds you provide
