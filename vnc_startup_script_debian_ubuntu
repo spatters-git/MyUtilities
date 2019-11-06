@@ -1,0 +1,17 @@
+# GCE Debian.Ubuntu startup script to install and launch VNC Server
+# Useful to get a linux desktop where you can run multiple shells, etc.
+# Must add a firewall rule allowing ingress on TCP 5900
+
+#!/bin/bash
+dpkg-query --status vnc4server > /dev/null 2>&1
+rc=$?
+if [  "$rc" -ne "0" ];
+then
+  echo "Installing vnc components"
+  apt-get update
+  DEBIAN_FRONTEND=noninteractive apt-get install xfce4 xfce4-goodies vnc4server -y
+  mkdir --parents ~/.vnc
+  echo "password" | vncpasswd -f > ~/.vnc/passwd
+  chmod 600 ~/.vnc/passwd
+fi
+HOME=~ vncserver :0 -localhost no
