@@ -1,0 +1,29 @@
+# Powershell command to "flip" a Windows SOFS cluster from Prod to DR.  It reverses roles from the currently-active SOFS cluster "sofs-clst" 
+
+# For a PLANNED failback, ideally run these commands interactively in administrative Powershell.  
+# Before running the Set-SRPartnership command,
+# run this command FROM SOFS-DR-D to ensure there are 0 bytes not yet synced:
+# (Get-SRGroup).Replicas | Select-Object numofbytesremaining
+# If it returns 0 bytes remaining, run the Set-SRPartnership command below.
+
+
+# to the currently passive SOFS cluster "sofs-cl-dr"
+# "rg01" and "rg02" are arbitrary Replication Group names created when Storage Replca was set up.
+Set-SRPartnership -NewSourceComputerName sofs-cl-dr -SourceRGName rg02 -DestinationComputerName sofs-clst -DestinationRGName rg01 -Force
+
+# To flip back to Prod, just reverse the command:
+Set-SRPartnership -NewSourceComputerName sofs-clst -SourceRGName rg01 -DestinationComputerName sofs-cl-dr -DestinationRGName rg02 -Force
+
+# Example to make an AD DNS change via PowerShell
+$Old=Get-DnsServerResourceRecord -ComputerName "uswslbwin-dc3" -Name "gcpslbdi02" -ZoneName "gontoso.com" -RRType "A"
+$New = $Old.Clone();
+$New.RecordData.IPv4Address = "10.5.10.223"
+Set-DnsServerResourceRecord -ComputerName "uswslbwin-dc3" -NewInputObject $New -OldInputObject $Old -ZoneName "gontoso.com" -PassThru
+
+# Example to shut down GCE instances from GCP SDK via PowerShell
+# Uses a json key associated with a GCP service account with sufficient Compute role to manage GCE instances.
+Start-Process -FilePath gcloud -ArgumentList "auth","activate-service-account","--key-file","C:\DR-Scripts\slb-sap-pilot-295fc1c2b655.json"
+Start-Process -FilePath gcloud -ArgumentList "compute","instances","start","gcpslbci01-dr","--zone=europe-west1-b","--quiet"
+Start-Process -FilePath gcloud -ArgumentList "compute","instances","start","gcpslbaas-dr","--zone=europe-west1-b","--quiet"
+
+
