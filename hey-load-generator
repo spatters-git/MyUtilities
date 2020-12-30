@@ -1,0 +1,5 @@
+# a Go app that runs HTTP tests.  
+# Install in Google Cloud Shell: go get -u github.com/rakyll/hey
+# The below command continually runs 25 concurrent HTTP requests for 2 minutes
+
+hey -z 2m -c 25 http://IP-ADDRESS
