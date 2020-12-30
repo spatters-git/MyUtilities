@@ -1,4 +1,4 @@
 # Run this command in bash to continually hit an LB VIP.  It is nto affected by caching as a browser is.  
 # Assumes there are noticable differences in the HTML
 
-while true; do curl http://104.154.202.89/; sleep 0.5; done
+while true; do curl http://EXTERNAL-IP/; sleep 0.5; done
